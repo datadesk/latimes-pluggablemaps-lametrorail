@@ -1,0 +1,52 @@
+<pre><code>888             d8888      888b     d888          888                         8888888b.           d8b 888 
+888            d88888      8888b   d8888          888                         888   Y88b          Y8P 888 
+888           d88P888      88888b.d88888          888                         888    888              888 
+888          d88P 888      888Y88888P888  .d88b.  888888 888d888 .d88b.       888   d88P  8888b.  888 888 
+888         d88P  888      888 Y888P 888 d8P  Y8b 888    888P"  d88""88b      8888888P"      "88b 888 888 
+888        d88P   888      888  Y8P  888 88888888 888    888    888  888      888 T88b   .d888888 888 888 
+888       d8888888888      888   "   888 Y8b.     Y88b.  888    Y88..88P      888  T88b  888  888 888 888 
+88888888 d88P     888      888       888  "Y8888   "Y888 888     "Y88P"       888   T88b "Y888888 888 888 </code></pre>
+
+A pluggable "GeoDjango":http://geodjango.org/ app of the Los Angeles Metro Rail system. Geography, loosely coupled.
+
+I gave "a talk":https://docs.google.com/present/view?id=ddw9cxb8_36ct9n7kcc in December 2010 about why I think maps should be pluggable.
+
+h2. Features
+
+* A ready-to-serve model set that contains the latest GIS data released by Metro Rail.
+* Fragmented rail lines in the government's source file have been consolidated.
+* Stops along each line have been connected to stations and lines. This is not done in the government's separate source files.
+* Geometry fields are published in three of the most common SRIDs, as well as their source projection.
+* Simplified geometry fields that thin down the data for display on a single map.
+* A read-only admin for reviewing the data
+
+h2. Requirements
+
+Before you begin, you will need to have a Django project with GeoDjango's 'django.contrib.gis' app installed and configured. The official installation guide is "here":http://docs.djangoproject.com/en/dev/ref/contrib/gis/install/. The official tutorial is "here":http://docs.djangoproject.com/en/dev/ref/contrib/gis/tutorial/. Both are excellent.
+
+h2. Getting started
+
+h3. 01. Install the source code
+
+You can download it from PyPi.
+<pre><code>pip install latimes-pluggablemaps-lametrorail</code></pre>
+
+Or, pull the trunk from github
+<pre><code>git clone git://github.com/datadesk/latimes-pluggablemaps-lametrorail.git</code></pre>
+
+h3. 02. Install the app in your Django project
+
+In settings.py's INSTALLED_APPS tuple, add the following.
+<pre><code>'la_metro_rail',</code></pre>
+
+h3. 03. Create the database tables
+
+From the shell, enter:
+<pre><code>python manage.py syncdb</code></pre>
+
+h3. 04. Load the data
+
+From the same shell, enter the following.
+<pre><code>python manage.py loadlametrorail</code></pre>
+
+That's it! You now fire up the Django admin or jump in the shell to start playing with the data.
